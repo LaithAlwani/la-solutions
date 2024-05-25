@@ -22,8 +22,8 @@ export default function Navbar() {
       <nav>
         <Link href="/" className="logo">
           <Image
-            src="/images/avatar.webp"
-            alt="Laith Alwani"
+            src="/images/logo_300dpi.webp"
+            alt="logo"
             id="avatar"
             priority
             width={48}
@@ -69,7 +69,7 @@ const NavLinks = () => {
       <Link href= "/about" className={pathname === "/about" ? "active" : ""}>
         About
       </Link>
-      <Link href="/projects" className={pathname === "/projects" ? "active" : ""}>
+      <Link href="/services" className={pathname === "/services" ? "active" : ""}>
         Projects
       </Link>
       <Link href="/contact" className={pathname === "/contact" ? "active" : ""}>
