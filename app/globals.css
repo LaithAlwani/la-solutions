@@ -183,7 +183,8 @@ label {
   
 }
 form .btn{
-  float:right
+  float:right;
+  min-width: 6rem;
 }
 .message-length {
   display: block;

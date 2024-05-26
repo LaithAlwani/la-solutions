@@ -9,7 +9,7 @@ export default function ContactPage() {
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [messageError, setMessageError] = useState(false);
-  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e, field) => {
     if (field === "name") {
@@ -46,12 +46,14 @@ export default function ContactPage() {
       toast.error("message longer than 250 char.");
     }
     if (name && email && message && message.length <= 250) {
-      setName("");
-      setEmail("");
-      setMessage("");
-
+      setLoading(true)
       setTimeout(() => {
+        
         toast.success("Message Sent!");
+        setName("");
+        setEmail("");
+        setMessage("");
+        setLoading(false)
       }, 2000);
     }
   };
@@ -103,8 +105,8 @@ export default function ContactPage() {
             {message.length < 249 || message.length > 251 ? "charcters" : "charcter"} remaning
           </span>
 
-          <button type="submit" className="btn">
-            Submit
+          <button type="submit" className="btn" disabled={loading}>
+            {loading ? "sending....":"submit"}
           </button>
         </form>
       </div>
