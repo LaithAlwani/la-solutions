@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 import SocialLink from "@/components/SocialLink";
 import SocialLinksList from "@/utils/SocialLinksList";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
 
       <html lang="en">
         <body>
+          <Toaster />
           <Navbar />
           <div className="content">{children}</div>
           <Footer />
