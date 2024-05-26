@@ -28,6 +28,8 @@ html {
 body {
   background-color: var(--background-color);
   color: var(--font-color);
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -36,33 +38,35 @@ a {
   padding: 0.75rem;
 }
 
-button{
+button {
   padding: 0.5rem 1rem;
   background-color: transparent;
   border-radius: 0.25rem;
   border: 1px solid;
 }
 
-.section {
+.container {
   max-width: 60rem;
   padding-block-start: 6rem;
   padding-block-end: 1rem;
   padding-inline: 1rem;
   margin-inline: auto;
-  
 }
+
+
 
 /*Navbar*/
 nav {
-  background-color: var(--background-color);
   position: fixed;
-  padding: 0 1rem;
-  width: 100%;
+  top: 0;
   left: 0;
-
+  background-color: var(--background-color);
+  padding: 1rem;
+  width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  box-shadow: 1px 4px 15px 0 rgba(0, 0, 0, .2);
   z-index: 3;
 }
 
@@ -112,7 +116,7 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 0;
   height: 0;
   display: flex;
   flex-direction: column;
@@ -124,6 +128,7 @@ nav {
 }
 
 .nav-mobile.open {
+  width: 100%;
   height: 100vh;
 }
 
@@ -153,7 +158,7 @@ textarea {
   width: 100%;
   font-family: "Source Sans Pro", sans-serif;
   color: var(--la-black);
-  
+
   line-height: 2rem;
   border: 1px solid var(--font-color);
   border-radius: var(--border-radius);
@@ -180,9 +185,8 @@ label {
   padding: 0 0.25rem 0.25rem;
   border-radius: 0.25rem;
   background-color: var(--background-color);
-  
 }
-form .btn-form{
+form .btn-form {
   margin-left: auto;
   min-width: 6rem;
 }
@@ -205,8 +209,6 @@ form .btn-form{
   font-weight: bold;
   letter-spacing: 0.07rem;
 }
-
-
 
 /* Custom Dark Mode Toggle Element */
 
@@ -288,7 +290,7 @@ footer span {
 }
 
 @media (min-width: 768px) {
-  .section{
+  .section {
     padding-inline: 3rem;
   }
 
@@ -304,7 +306,7 @@ footer span {
   footer ul {
     position: fixed;
     bottom: 1rem;
-    right: 0;
+    left: 0;
     display: block;
     padding: 0;
     background-color: transparent;
