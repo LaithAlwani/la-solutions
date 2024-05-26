@@ -57,48 +57,53 @@ export default function ContactForm() {
     }
   };
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
-          <div className="input-wrapper">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              name="name"
-              placeholder="John"
-              value={name}
-              onChange={(e) => handleChange(e, "name")}
-              className={nameError ? "input-error" : ""}
-            />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="johnsmith@example.com"
-              value={email}
-              onChange={(e) => handleChange(e, "email")}
-              className={emailError ? "input-error" : ""}
-            />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="message">Message</label>
-            <textarea
-              type="text"
-              name="message"
-              placeholder="Message should 250 characters or less..."
-              value={message}
-              onChange={(e) => handleChange(e, "message")}
-              className={messageError ? "input-error" : ""}
-            />
-          </div>
-          <span className={message.length >= 251 ? "message-length error" : "message-length"}>
-            {250 - message.length}{" "}
-            {message.length < 249 || message.length > 251 ? "charcters" : "charcter"} remaning
-          </span>
+    <>
+      <h2>Lets talk about your project</h2>
+      <h3>I will contact as soon as I can</h3>
 
-          <button type="submit" className="btn" disabled={loading}>
-            {loading ? "sending....":"submit"}
-          </button>
-        </form>
-  )
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <div className="input-wrapper">
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="John"
+            value={name}
+            onChange={(e) => handleChange(e, "name")}
+            className={nameError ? "input-error" : ""}
+          />
+        </div>
+        <div className="input-wrapper">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="johnsmith@example.com"
+            value={email}
+            onChange={(e) => handleChange(e, "email")}
+            className={emailError ? "input-error" : ""}
+          />
+        </div>
+        <div className="input-wrapper">
+          <label htmlFor="message">Message</label>
+          <textarea
+            type="text"
+            name="message"
+            placeholder="Message should 250 characters or less..."
+            value={message}
+            onChange={(e) => handleChange(e, "message")}
+            className={messageError ? "input-error" : ""}
+          />
+        </div>
+        <span className={message.length >= 251 ? "message-length error" : "message-length"}>
+          {250 - message.length}{" "}
+          {message.length < 249 || message.length > 251 ? "charcters" : "charcter"} remaning
+        </span>
+
+        <button type="submit" className="btn-form" disabled={loading}>
+          {loading ? "sending...." : "submit"}
+        </button>
+      </form>
+    </>
+  );
 }

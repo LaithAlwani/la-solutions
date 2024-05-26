@@ -141,7 +141,7 @@ form {
   background-color: transparent;
   border-radius: var(--border-radius);
   max-width: 100%;
-  
+  padding-block: 2rem;
 }
 
 .input-wrapper {
@@ -182,10 +182,11 @@ label {
   background-color: var(--background-color);
   
 }
-form .btn{
-  float:right;
+form .btn-form{
+  margin-left: auto;
   min-width: 6rem;
 }
+
 .message-length {
   display: block;
   padding-block: 1rem;
@@ -194,8 +195,6 @@ form .btn{
   opacity: 0.7;
   font-size: 0.8rem;
 }
-
-
 
 .input-error {
   border: 1px solid red;
