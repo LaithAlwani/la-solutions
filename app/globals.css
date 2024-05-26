@@ -289,6 +289,10 @@ footer span {
 }
 
 @media (min-width: 768px) {
+  .section{
+    padding-inline: 3rem;
+  }
+
   .nav-links {
     display: flex;
     align-items: center;
@@ -301,7 +305,7 @@ footer span {
   footer ul {
     position: fixed;
     bottom: 1rem;
-    right: 1rem;
+    right: 0;
     display: block;
     padding: 0;
     background-color: transparent;
