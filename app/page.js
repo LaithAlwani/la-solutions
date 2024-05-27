@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import ContactForm from "@/components/ContactForm";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -19,13 +20,12 @@ export default function Home() {
                   class="shape-fill"></path>
               </svg>
             </div>
-            <h1>A Modren Take on Web Development</h1>
+            <h1>Crafting digital dreams into clickable reality</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur fugit nesciunt
-              ipsum hic odio qui dolorum deserunt maiores culpa, distinctio ratione dolore eligendi
-              nostrum eius esse quia suscipit repudiandae debitis. 
+              I create digital solutions to slove complex problems through expert development,
+              innovative design, and seamless user experience.
             </p>
-            <button>Contact</button>
+            <Link href="#contact" className={styles.btn}>Contact</Link>
           </div>
         </div>
       </section>

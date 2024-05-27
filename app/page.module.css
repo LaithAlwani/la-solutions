@@ -3,14 +3,41 @@
   width: 100%;
   min-height: 40vh;
   background-color: var(--la-black);
-  padding-block: 5rem;
   color: var(--background-color);
   margin-bottom: 0;
+}
+
+.banner h1{
+  font-size: 2.5rem;
+  max-width: 28rem;
+  margin-bottom: 1rem;
+}
+
+.banner p{
+  margin-bottom: 2rem;
+}
+
+.img{
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 
 .custom-shape-divider-bottom-1716742249{
   display: none;
+}
+
+.btn{
+  background-color: #e53f3f;
+  border: none;
+  border-radius: 0.25rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn:hover{
+
 }
 
 .contactFormContainer {
@@ -45,10 +72,18 @@
     width: 100%;
     min-height: 40vh;
     background-color: var(--la-black);
-    padding-top: 5rem;
+    padding-top: 1rem;
     color: var(--background-color);
     margin-bottom: 10rem;
   }
+  .banner h1{
+    font-size: 3rem;
+    max-width: 600px;
+  }
+  .banner p{
+    max-width: 60%;
+  }
+  
   .custom-shape-divider-bottom-1716742249 {
     position: absolute;
     display: block;

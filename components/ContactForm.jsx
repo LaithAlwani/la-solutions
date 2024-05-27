@@ -61,7 +61,7 @@ export default function ContactForm() {
       <h2>Lets talk about your project</h2>
       <h3>I will contact as soon as I can</h3>
 
-      <form onSubmit={handleSubmit} autoComplete="off">
+      <form id="contact" onSubmit={handleSubmit} autoComplete="off">
         <div className="input-wrapper">
           <label htmlFor="name">Name</label>
           <input
