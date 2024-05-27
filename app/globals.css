@@ -40,6 +40,7 @@ body {
 
 main{
   padding-block-start: 5rem;
+  min-height: 92vh;
 }
 
 a {
@@ -150,11 +151,11 @@ nav {
 }
 
 /*form*/
+
 form {
   background-color: transparent;
   border-radius: var(--border-radius);
   max-width: 100%;
-  padding: 2rem 1rem;
 }
 
 .input-wrapper {
@@ -166,7 +167,6 @@ textarea {
   width: 100%;
   font-family: "Source Sans Pro", sans-serif;
   color: var(--la-black);
-
   line-height: 2rem;
   border: 1px solid var(--font-color);
   border-radius: var(--border-radius);
@@ -186,6 +186,7 @@ textarea:focus {
   outline: none;
   box-shadow: 0.1rem 0.1rem 0.25rem var(--background-accent);
 }
+
 
 label {
   position: absolute;

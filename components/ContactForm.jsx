@@ -61,7 +61,7 @@ export default function ContactForm() {
       <h2>Lets talk about your project</h2>
       <h3>I will contact as soon as I can</h3>
 
-      <form id="contact" onSubmit={handleSubmit} autoComplete="off">
+      <form onSubmit={handleSubmit} autoComplete="off">
         <div className="input-wrapper">
           <label htmlFor="name">Name</label>
           <input
@@ -89,7 +89,7 @@ export default function ContactForm() {
           <textarea
             type="text"
             name="message"
-            placeholder="Message should 250 characters or less..."
+            placeholder="message..."
             value={message}
             onChange={(e) => handleChange(e, "message")}
             className={messageError ? "input-error" : ""}

@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
         <body>
           <Toaster />
           <Navbar />
-          <main className="content">{children}</main>
+          <main>{children}</main>
           <Footer />
         </body>
       </html>

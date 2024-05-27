@@ -29,7 +29,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className={styles.contactFormContainer}>
+      <section id="contact" className={styles.contactFormContainer}>
         <div className={styles.contactFormWrapper}>
           <ContactForm />
         </div>
