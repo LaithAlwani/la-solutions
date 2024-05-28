@@ -20,30 +20,26 @@ export default function Navbar() {
   return (
     <>
       <nav>
-        <Link href="/" className="logo">
-          <Image
-            src="/images/logo_300dpi.webp"
-            alt="logo"
-            priority
-            width={48}
-            height={48}
-          />
-          <div className="my-title-container">
-            <strong>Laith Alwani</strong>
-            <em>Full Stack Developer</em>
-          </div>
-        </Link>
+        <div className="nav-container">
+          <Link href="/" className="logo">
+            <Image src="/images/logo_300dpi.webp" alt="logo" priority width={48} height={48} />
+            <div className="my-title-container">
+              <strong>Laith Alwani</strong>
+              <em>Full Stack Developer</em>
+            </div>
+          </Link>
 
-        <div className="nav-links">
-          <NavLinks />
+          <div className="nav-links">
+            <NavLinks />
+          </div>
+          <ThemeComponent />
+          <button
+            aria-label="nav-button"
+            onClick={() => setToggleMenu(!toggleMenu)}
+            className="mobile-nav-button">
+            {!toggleMenu ? <MdMenu size={28} /> : <MdClose size={28} />}
+          </button>
         </div>
-        <ThemeComponent />
-        <button
-          aria-label="nav-button"
-          onClick={() => setToggleMenu(!toggleMenu)}
-          className="mobile-nav-button">
-          {!toggleMenu ? <MdMenu size={28} /> : <MdClose size={28} />}
-        </button>
       </nav>
 
       <div
@@ -68,7 +64,7 @@ const NavLinks = () => {
       <Link href="/services" className={pathname === "/services" ? "active" : ""}>
         Services
       </Link>
-      <Link href= "/about" className={pathname === "/about" ? "active" : ""}>
+      <Link href="/about" className={pathname === "/about" ? "active" : ""}>
         About
       </Link>
       <Link href="/contact" className={pathname === "/contact" ? "active" : ""}>
