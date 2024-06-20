@@ -32,7 +32,7 @@ export default function Navbar() {
           <div className="nav-links">
             <NavLinks />
           </div>
-          <ThemeComponent />
+          {/* <ThemeComponent /> */}
           <button
             aria-label="nav-button"
             onClick={() => setToggleMenu(!toggleMenu)}

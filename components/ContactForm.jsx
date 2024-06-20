@@ -100,7 +100,7 @@ export default function ContactForm() {
           {message.length < 249 || message.length > 251 ? "charcters" : "charcter"} remaning
         </span>
 
-        <button type="submit" className="btn-form" disabled={loading}>
+        <button type="submit" className="btn" disabled={loading}>
           {loading ? "sending...." : "submit"}
         </button>
       </form>

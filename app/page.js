@@ -25,7 +25,7 @@ export default function Home() {
               I create digital solutions to slove complex problems through expert development,
               innovative design, and seamless user experience.
             </p>
-            <Link href="#contact" className={styles.btn}>Contact</Link>
+            <Link href="#contact" className="btn">Contact</Link>
           </div>
         </div>
       </section>

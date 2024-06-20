@@ -6,16 +6,17 @@
   --la-green: #73d473;
   --la-dark-gray: #666;
   --la-black: #333;
-  --la-off-white: #fff;
+  --la-white: #fff;
   --border-radius: 0.25rem;
-  --background-color: var(--la-off-white);
+  --background-color: var(--la-white);
   --background-accent: #b5b5b5;
   --font-color: var(--la-black);
+  --la-red:#e53f3f;
 }
 
 [data-theme="dark"] {
   --background-color: var(--la-black);
-  --font-color: var(--la-off-white);
+  --font-color: var(--la-white);
   --background-accent: #1e1e1e;
 }
 
@@ -49,11 +50,13 @@ a {
   padding: 0.75rem;
 }
 
-button {
+.btn {
   padding: 0.5rem 1rem;
   background-color: transparent;
   border-radius: 0.25rem;
-  border: 1px solid; 
+  border: none; 
+  background-color: var(--la-red);
+  color: var(--la-white);
 }
 
 .container {
@@ -201,10 +204,7 @@ label {
   border-radius: 0.25rem;
   background-color: var(--background-color);
 }
-form .btn-form {
-  margin-left: auto;
-  min-width: 6rem;
-}
+
 
 .message-length {
   display: block;

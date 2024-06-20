@@ -1,49 +1,36 @@
-.banner{
+.banner {
   position: relative;
   width: 100%;
   min-height: 40vh;
   background-color: var(--la-black);
-  color: var(--background-color);
+  color: var(--la-white);
   margin-bottom: 0;
 }
 
-.banner h1{
+.banner h1 {
   font-size: 2.5rem;
   max-width: 28rem;
   margin-bottom: 1rem;
 }
 
-.banner p{
+.banner p {
   margin-bottom: 2rem;
 }
 
-.img{
+.img {
   position: absolute;
   right: 0;
   top: 0;
 }
 
-
-.custom-shape-divider-bottom-1716742249{
+.custom-shape-divider-bottom-1716742249 {
   display: none;
-}
-
-.btn{
-  background-color: #e53f3f;
-  border: none;
-  border-radius: 0.25rem;
-  color: #fff;
-  cursor: pointer;
-}
-
-.btn:hover{
-
 }
 
 .contactFormContainer {
   position: relative;
   height: 40rem;
-  background-color: blanchedalmond;
+  background-color: var(--background-accent);
 }
 
 .contactFormWrapper {
@@ -66,24 +53,21 @@
   padding-bottom: 5rem;
 }
 
-@media only screen and (min-width:768px) {
-  .banner{
-    position: relative;
-    width: 100%;
-    min-height: 40vh;
-    background-color: var(--la-black);
+@media only screen and (min-width: 768px) {
+  .banner {
     padding-top: 1rem;
-    color: var(--background-color);
     margin-bottom: 10rem;
   }
-  .banner h1{
+
+  .banner h1 {
     font-size: 3rem;
     max-width: 600px;
   }
-  .banner p{
+
+  .banner p {
     max-width: 60%;
   }
-  
+
   .custom-shape-divider-bottom-1716742249 {
     position: absolute;
     display: block;
@@ -94,7 +78,7 @@
     line-height: 0;
     transform: rotate(0deg);
   }
-  
+
   .custom-shape-divider-bottom-1716742249 svg {
     position: relative;
     display: block;
@@ -102,9 +86,8 @@
     height: 150px;
     fill: var(--la-black);
   }
-  
+
   .custom-shape-divider-bottom-1716742249 .shape-fill {
     fill: var(--background-color);
   }
-  
 }
