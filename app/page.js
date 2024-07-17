@@ -39,7 +39,7 @@ export default function Home() {
             <li>Responsive Design</li>
             <li>Preformance</li>
             <li>SQL and non SQL database</li>
-            <li>headless CRM's</li>
+            <li>headless CRM&apos;s</li>
             <li></li>
           </ul>
         </div>
@@ -53,7 +53,7 @@ export default function Home() {
             <li>Node js and PHP</li>
             <li>My SQL and MongoDB</li>
             <li>Azure google and AWS devops</li>
-            <li>WP/WIX/Shopify headless CRM's</li>
+            <li>WP/WIX/Shopify headless CRM&apos;s</li>
           </ul>
         </div>
       </section>
