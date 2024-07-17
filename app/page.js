@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <section>
+      <section className="hero">
         <div className={styles.banner}>
           <div className="container">
             <div class={styles["custom-shape-divider-bottom-1716742249"]}>
@@ -25,10 +25,49 @@ export default function Home() {
               I create digital solutions to slove complex problems through expert development,
               innovative design, and seamless user experience.
             </p>
-            <Link href="#contact" className="btn">Contact</Link>
+            <Link href="#contact" className="btn">
+              Contact
+            </Link>
           </div>
         </div>
       </section>
+      <section>
+        <div className="container">
+          <h2>what we provide</h2>
+          <ul>
+            <li>SEO</li>
+            <li>Responsive Design</li>
+            <li>Preformance</li>
+            <li>SQL and non SQL database</li>
+            <li>headless CRM's</li>
+            <li></li>
+          </ul>
+        </div>
+      </section>
+      <section>
+        <div className="container">
+          <h2>Tech Stack</h2>
+          <ul>
+            <li>JS Frame works includeing Angular and React</li>
+            <li>CSS and frame works including Tailwind and Material UI</li>
+            <li>Node js and PHP</li>
+            <li>My SQL and MongoDB</li>
+            <li>Azure google and AWS devops</li>
+            <li>WP/WIX/Shopify headless CRM's</li>
+          </ul>
+        </div>
+      </section>
+      <section>
+        <div className="container">
+          <h2>Our Clients</h2>
+          <ul>
+            <li>Sales Knack</li>
+            <li>Score Renovations</li>
+            <li>Health Haven Aesthetics</li>
+          </ul>
+        </div>
+      </section>
+
       <section id="contact" className={styles.contactFormContainer}>
         <div className={styles.contactFormWrapper}>
           <ContactForm />
