@@ -1,7 +1,7 @@
 import Image from "next/image";
 import "@/styles/solution.css";
 
-export default function () {
+export default function Solution () {
   return (
     <ul className="solutions-list">
       <li>
