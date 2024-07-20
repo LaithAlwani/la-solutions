@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import ContactForm from "@/components/ContactForm";
 import Link from "next/link";
+import Solution from "@/components/Solution";
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
       <section className="hero">
         <div className={styles.banner}>
           <div className="container">
-            <div class={styles["custom-shape-divider-bottom-1716742249"]}>
+            <div className={styles["custom-shape-divider-bottom-1716742249"]}>
               <svg
                 data-name="Layer 1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +18,7 @@ export default function Home() {
                 preserveAspectRatio="none">
                 <path
                   d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                  class="shape-fill"></path>
+                  className="shape-fill"></path>
               </svg>
             </div>
             <h1>Crafting digital dreams into clickable reality</h1>
@@ -34,33 +35,26 @@ export default function Home() {
       <section>
         <div className="container">
           <h2>what we provide</h2>
-          <ul>
-            <li>SEO</li>
-            <li>Responsive Design</li>
-            <li>Preformance</li>
-            <li>SQL and non SQL database</li>
-            <li>headless CRM&apos;s</li>
-            <li></li>
-          </ul>
+          <Solution />
         </div>
       </section>
       <section>
         <div className="container">
           <h2>Tech Stack</h2>
           <ul>
-            <li>JS Frame works includeing Angular and React</li>
-            <li>CSS and frame works including Tailwind and Material UI</li>
+            <li>JS Frameworks including Angular React and Vue</li>
+            <li>CSS and frameworks including Bootstrap, Tailwind and Material UI</li>
             <li>Node js and PHP</li>
-            <li>My SQL and MongoDB</li>
-            <li>Azure google and AWS devops</li>
-            <li>WP/WIX/Shopify headless CRM&apos;s</li>
+            <li>SQL and MongoDB database</li>
+            <li>Azure, google and AWS devops</li>
+            <li>WordPress, WIX and Shopify headless CRM&apos;s</li>
           </ul>
         </div>
       </section>
       <section>
         <div className="container">
           <h2>Our Clients</h2>
-          <ul>
+          <ul className="client-list">
             <li>Sales Knack</li>
             <li>Score Renovations</li>
             <li>Health Haven Aesthetics</li>

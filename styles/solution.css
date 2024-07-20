@@ -1,0 +1,21 @@
+.solutions-list  {
+  display: grid;
+  text-align: center;
+}
+
+.image-wrapper{
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto ;
+}
+
+.image-wrapper img{
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .solutions-list  {
+    grid-template-columns: 1fr 1fr;
+  }
+}
