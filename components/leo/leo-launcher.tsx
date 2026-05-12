@@ -28,17 +28,17 @@ export function LeoLauncher() {
         animate={reduced ? { opacity: 1 } : { opacity: 1, scale: 1 }}
         transition={{ delay: 0.4, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         whileHover={reduced ? undefined : { y: -2 }}
-        className="fixed bottom-5 right-4 z-[55] inline-flex items-center gap-2 rounded-pill bg-brand-orange px-4 py-3 text-sm font-semibold text-white shadow-glow ring-1 ring-brand-orange/40 transition-colors hover:bg-brand-orange-soft sm:right-6"
+        className="fixed bottom-5 right-4 z-[55] grid h-14 w-14 place-items-center rounded-pill bg-brand-orange text-white shadow-glow ring-1 ring-brand-orange/40 transition-colors hover:bg-brand-orange-soft sm:right-6 sm:inline-flex sm:h-auto sm:w-auto sm:items-center sm:gap-2 sm:px-4 sm:py-3 sm:text-sm sm:font-semibold"
       >
-        {open ? (
-          <X className="h-4 w-4" />
-        ) : (
-          <Sparkles className="h-4 w-4" />
-        )}
-        <span className="hidden sm:inline">
-          {open ? strings.closeLabel : strings.launcherLabel}
+        {/* Mobile: single large chat icon (or X when open) */}
+        <span className="sm:hidden">
+          {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
         </span>
-        <MessageCircle className="h-4 w-4 sm:hidden" />
+        {/* Desktop: sparkles + text label */}
+        <span className="hidden sm:contents">
+          {open ? <X className="h-4 w-4" /> : <Sparkles className="h-4 w-4" />}
+          <span>{open ? strings.closeLabel : strings.launcherLabel}</span>
+        </span>
       </motion.button>
     </>
   );

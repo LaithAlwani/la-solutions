@@ -34,9 +34,32 @@ export function LeoPanel({ open, onClose }: Props) {
     return () => window.removeEventListener("keydown", handler);
   }, [open, onClose]);
 
+  // Lock page scroll while the panel is open so the dimmed background
+  // can't move under the chat.
+  useEffect(() => {
+    if (!open) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [open]);
+
   return (
     <AnimatePresence>
-      {open ? (
+      {open && (
+        <motion.div
+          key="backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          onClick={onClose}
+          aria-hidden
+          className="fixed inset-0 z-58 bg-ink/65 backdrop-blur-sm"
+        />
+      )}
+      {open && (
         <motion.div
           key="panel"
           initial={reduced ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.96 }}
@@ -45,6 +68,7 @@ export function LeoPanel({ open, onClose }: Props) {
           transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
           className="fixed bottom-24 right-4 z-[60] flex h-[min(620px,calc(100vh-8rem))] w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-card border border-border bg-ink shadow-card-hover sm:right-6"
           role="dialog"
+          aria-modal="true"
           aria-label="Leo chat"
         >
           {/* Header */}
@@ -105,7 +129,7 @@ export function LeoPanel({ open, onClose }: Props) {
             onSend={chat.send}
           />
         </motion.div>
-      ) : null}
+      )}
     </AnimatePresence>
   );
 }
