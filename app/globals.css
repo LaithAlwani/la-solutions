@@ -85,6 +85,66 @@ html {
     linear-gradient(180deg, rgba(7, 8, 10, 0.35) 0%, rgba(7, 8, 10, 0.6) 60%, rgba(7, 8, 10, 1) 100%);
 }
 
+/* Leo chat — slim scrollbar on the textarea so it doesn't visually crash the panel. */
+.leo-textarea {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+.leo-textarea::-webkit-scrollbar {
+  width: 6px;
+}
+.leo-textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+.leo-textarea::-webkit-scrollbar-thumb {
+  background-color: var(--color-border-strong);
+  border-radius: 999px;
+}
+.leo-textarea::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-muted-2);
+}
+
+/* Leo chat — narrow, well-behaved markdown rendering inside message bubbles. */
+.leo-markdown > * + * {
+  margin-top: 0.5rem;
+}
+.leo-markdown p {
+  margin: 0;
+  line-height: 1.55;
+}
+.leo-markdown ul,
+.leo-markdown ol {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.leo-markdown ul {
+  list-style: disc;
+}
+.leo-markdown ol {
+  list-style: decimal;
+}
+.leo-markdown li {
+  line-height: 1.5;
+}
+.leo-markdown strong {
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+.leo-markdown em {
+  font-style: italic;
+}
+.leo-markdown code {
+  background: var(--color-ink-2);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.05rem 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
