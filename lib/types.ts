@@ -93,6 +93,17 @@ export type SiteConfig = {
     region: string;
     addressLine?: string;
     businessHours?: string;
+    /**
+     * Geo + postal data — drives the LocalBusiness JSON-LD that lifts local
+     * search visibility. Approximate is fine; Google uses it as a centroid.
+     */
+    geo?: {
+      latitude: number;
+      longitude: number;
+      postalCode: string;
+      regionCode: string; // ISO-3166-2 subdivision, e.g. "ON"
+      countryCode: string; // ISO-3166-1 alpha-2, e.g. "CA"
+    };
   };
   /**
    * Global pricing knobs that apply across the platform plans. Stored once so

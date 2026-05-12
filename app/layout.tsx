@@ -4,6 +4,8 @@ import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { LeoWidget } from "@/components/leo/leo-widget";
+import { JsonLd } from "@/components/seo/json-ld";
+import { organizationLd, localBusinessLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -19,6 +21,9 @@ export const metadata: Metadata = {
   keywords: siteConfig.seo.keywords,
   applicationName: siteConfig.company.name,
   authors: [{ name: siteConfig.company.legalName }],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: siteConfig.company.locale,
@@ -49,7 +54,17 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
+  // TODO: once you've claimed the property in Google Search Console + Bing,
+  // add the verification codes here. Both accept multiple codes per service.
+  // verification: { google: "...", other: { "msvalidate.01": "..." } },
 };
 
 export default function RootLayout({
@@ -65,6 +80,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-ink text-foreground">
+        <JsonLd data={[organizationLd(), localBusinessLd()]} />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

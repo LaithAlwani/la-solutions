@@ -37,6 +37,16 @@ export const siteConfig: SiteConfig = {
     region: "Ontario, Canada",
     addressLine: "Ottawa, ON, Canada",
     businessHours: "Mon–Fri, 9am–4pm ET",
+    // Approximate Ottawa downtown centroid — Google uses this as the
+    // anchor point for LocalBusiness map intent. Refine if/when we have
+    // a specific street address registered.
+    geo: {
+      latitude: 45.4215,
+      longitude: -75.6972,
+      postalCode: "K1P 1J1",
+      regionCode: "ON",
+      countryCode: "CA",
+    },
   },
 
   pricing: {
@@ -354,18 +364,34 @@ export const siteConfig: SiteConfig = {
     titleTemplate: "%s | LA Digital",
     defaultDescription:
       "LA Digital is a subscription-based business platform — websites, automation, customer management, and growth services on a simple monthly plan. $0 setup with an annual commitment.",
-    ogImage: "/logo_300dpi.png",
+    ogImage: "/og-default.png",
     siteUrl: "https://ladigital.ca",
     keywords: [
+      // Core positioning
       "business platform",
       "subscription website",
       "managed website service",
-      "business automation",
-      "customer management platform",
-      "online booking system",
-      "Ottawa business platform",
+      "business operating system",
       "small business operating system",
-      "AI assistant",
+      // Local intent (Ottawa / Canada)
+      "Ottawa business platform",
+      "Ottawa web design",
+      "managed website Ottawa",
+      "small business website Ottawa",
+      "subscription website Canada",
+      "monthly website Canada",
+      // Capabilities the plans cover
+      "online booking system",
+      "customer management platform",
+      "business automation",
+      "AI chatbot small business",
+      "AI assistant for SMB",
+      "CRM small business Canada",
+      // Growth services
+      "SEO Ottawa",
+      "social media management Ottawa",
+      "Google Ads management Ottawa",
+      "Meta Ads management Canada",
       "marketing automation Canada",
     ],
   },

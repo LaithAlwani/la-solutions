@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(findstr /R /S \"Image|<img\" app components)",
+      "Bash(Get-Content app/page.tsx, components/sections/*.tsx, components/layout/*.tsx, components/ui/*.tsx -ErrorAction SilentlyContinue)",
+      "Bash(Select-String -Pattern \"Image|import.*Image\")",
+      "Bash(npx tsc *)",
+      "Bash(echo \"---exit=$?\")"
+    ]
+  }
+}
