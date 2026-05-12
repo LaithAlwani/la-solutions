@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { detectLocale, leoStrings, type Locale } from "@/lib/leo-strings";
+import { loadChat, saveChat, type PersistedMessage } from "@/lib/leo-storage";
 import type { LeoTurn } from "@/lib/schemas";
 
 // Soft cap on client-side history sent per turn. The server still validates.
@@ -56,19 +57,61 @@ export function useLeoChat(): LeoChatApi {
   const [messages, setMessages] = useState<LeoUiMessage[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Gate persistence on having completed the initial hydration step — we
+  // don't want to overwrite a real stored chat with the empty default during
+  // the first render pass.
+  const hydratedRef = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
 
+  // Hydrate: restore from localStorage if available, otherwise seed greeting.
   useEffect(() => {
-    const loc = detectLocale();
-    setLocale(loc);
-    setMessages([
-      {
-        id: "greeting",
-        role: "system-greeting",
-        content: leoStrings(loc).greeting,
-      },
-    ]);
+    const stored = loadChat();
+    if (stored && stored.messages.length > 0) {
+      setLocale(stored.locale);
+      setMessages(
+        stored.messages.map((m) => ({
+          ...m,
+          // In-flight lead submissions never resume — reset to "open" so the
+          // user can re-submit if they want to.
+          leadFormStatus:
+            m.leadFormStatus === "sent" ? "sent" : m.showLeadForm ? "open" : undefined,
+        })),
+      );
+    } else {
+      const loc = detectLocale();
+      setLocale(loc);
+      setMessages([
+        {
+          id: "greeting",
+          role: "system-greeting",
+          content: leoStrings(loc).greeting,
+        },
+      ]);
+    }
+    hydratedRef.current = true;
   }, []);
+
+  // Persist on every change after hydration.
+  useEffect(() => {
+    if (!hydratedRef.current) return;
+    if (messages.length === 0) return;
+    // Strip pending placeholders and any "submitting" lead state — those
+    // represent transient UI we don't want to resurrect after a reload.
+    const cleaned: PersistedMessage[] = messages
+      .filter((m) => !m.pending && m.content.trim().length > 0)
+      .map((m) => ({
+        id: m.id,
+        role: m.role,
+        content: m.content,
+        ...(m.showLeadForm ? { showLeadForm: true } : {}),
+        ...(m.leadFormStatus === "sent"
+          ? { leadFormStatus: "sent" as const }
+          : m.showLeadForm
+            ? { leadFormStatus: "open" as const }
+            : {}),
+      }));
+    saveChat(cleaned, locale);
+  }, [messages, locale]);
 
   const send = useCallback(
     async (text: string) => {

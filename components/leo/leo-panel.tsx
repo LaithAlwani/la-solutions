@@ -66,7 +66,7 @@ export function LeoPanel({ open, onClose }: Props) {
           animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
           exit={reduced ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.96 }}
           transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-24 right-4 z-[60] flex h-[min(620px,calc(100vh-8rem))] w-[min(380px,calc(100vw-2rem))] flex-col overflow-hidden rounded-card border border-border bg-ink shadow-card-hover sm:right-6"
+          className="fixed inset-0 z-60 flex flex-col overflow-hidden bg-ink shadow-card-hover sm:inset-auto sm:bottom-24 sm:right-6 sm:h-[min(620px,calc(100vh-8rem))] sm:w-[min(380px,calc(100vw-2rem))] sm:rounded-card sm:border sm:border-border"
           role="dialog"
           aria-modal="true"
           aria-label="Leo chat"
