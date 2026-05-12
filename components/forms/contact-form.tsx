@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState, useRef, useEffect } from "react";
+import { useActionState, useState, useEffect } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { submitContact } from "@/app/actions/contact";
@@ -18,21 +18,58 @@ const inputBase =
 
 const labelBase = "text-xs font-medium uppercase tracking-[0.14em] text-muted";
 
+type FormValues = {
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  service: string;
+  budget: string;
+  message: string;
+  consent: boolean;
+};
+
+function emptyValues(defaultService?: string, messagePrefill = ""): FormValues {
+  return {
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    service: defaultService ?? "",
+    budget: "",
+    message: messagePrefill,
+    consent: false,
+  };
+}
+
 export function ContactForm({ defaultService, defaultPackage }: Props) {
   const [state, formAction, pending] = useActionState(submitContact, INITIAL_CONTACT_STATE);
-  const formRef = useRef<HTMLFormElement>(null);
-  const [serviceValue, setServiceValue] = useState(defaultService ?? "");
   const reduced = useReducedMotion();
 
+  const messagePrefill = defaultPackage
+    ? `I'm interested in the "${defaultPackage}" plan. Here's a bit about my business:\n\n`
+    : "";
+
+  // Controlled state for every field. React 19 resets uncontrolled inputs
+  // after a server-action submission (even when the action returns an error),
+  // which wipes out anything the user typed when validation fails. Holding
+  // the values in React state keeps them through an error round-trip and we
+  // clear them explicitly on success below.
+  const [values, setValues] = useState<FormValues>(() =>
+    emptyValues(defaultService, messagePrefill),
+  );
+
+  function set<K extends keyof FormValues>(key: K, val: FormValues[K]) {
+    setValues((prev) => ({ ...prev, [key]: val }));
+  }
+
   useEffect(() => {
-    if (state.status === "success") formRef.current?.reset();
+    if (state.status === "success") {
+      setValues(emptyValues());
+    }
   }, [state.status]);
 
   const fieldErrors: ContactFieldErrors = state.status === "error" ? state.fieldErrors ?? {} : {};
-  const messagePrefill =
-    defaultPackage && defaultService
-      ? `I'm interested in the "${defaultPackage}" package under ${defaultService}.`
-      : "";
 
   return (
     <div className="relative">
@@ -68,7 +105,6 @@ export function ContactForm({ defaultService, defaultPackage }: Props) {
         ) : (
           <motion.form
             key="form"
-            ref={formRef}
             action={formAction}
             initial={false}
             className="flex flex-col gap-5 rounded-card border border-border bg-surface/40 p-6 md:p-8"
@@ -89,6 +125,8 @@ export function ContactForm({ defaultService, defaultPackage }: Props) {
                 name="name"
                 required
                 autoComplete="name"
+                value={values.name}
+                onChange={(v) => set("name", v)}
                 error={fieldErrors.name?.[0]}
               />
               <Field
@@ -97,6 +135,8 @@ export function ContactForm({ defaultService, defaultPackage }: Props) {
                 type="email"
                 required
                 autoComplete="email"
+                value={values.email}
+                onChange={(v) => set("email", v)}
                 error={fieldErrors.email?.[0]}
               />
               <Field
@@ -104,12 +144,16 @@ export function ContactForm({ defaultService, defaultPackage }: Props) {
                 name="phone"
                 type="tel"
                 autoComplete="tel"
+                value={values.phone}
+                onChange={(v) => set("phone", v)}
                 error={fieldErrors.phone?.[0]}
               />
               <Field
                 label="Company (optional)"
                 name="company"
                 autoComplete="organization"
+                value={values.company}
+                onChange={(v) => set("company", v)}
                 error={fieldErrors.company?.[0]}
               />
             </div>
@@ -122,8 +166,8 @@ export function ContactForm({ defaultService, defaultPackage }: Props) {
                 <select
                   id="service"
                   name="service"
-                  value={serviceValue}
-                  onChange={(e) => setServiceValue(e.target.value)}
+                  value={values.service}
+                  onChange={(e) => set("service", e.target.value)}
                   className={inputBase}
                 >
                   <option value="">Not sure yet</option>
@@ -139,7 +183,13 @@ export function ContactForm({ defaultService, defaultPackage }: Props) {
                 <label htmlFor="budget" className={labelBase}>
                   Budget (optional)
                 </label>
-                <select id="budget" name="budget" defaultValue="" className={inputBase}>
+                <select
+                  id="budget"
+                  name="budget"
+                  value={values.budget}
+                  onChange={(e) => set("budget", e.target.value)}
+                  className={inputBase}
+                >
                   <option value="">No preference</option>
                   {BUDGET_VALUES.map((b) => (
                     <option key={b} value={b}>
@@ -152,7 +202,7 @@ export function ContactForm({ defaultService, defaultPackage }: Props) {
 
             <div className="flex flex-col gap-1.5">
               <label htmlFor="message" className={labelBase}>
-                Tell us about your project
+                Tell us about your business
               </label>
               <textarea
                 id="message"
@@ -161,8 +211,9 @@ export function ContactForm({ defaultService, defaultPackage }: Props) {
                 rows={5}
                 minLength={10}
                 maxLength={2000}
-                defaultValue={messagePrefill}
-                placeholder="What are you trying to build? Any timeline or constraints?"
+                value={values.message}
+                onChange={(e) => set("message", e.target.value)}
+                placeholder="What does your business do? What are you trying to accomplish over the next 6–12 months?"
                 className={cn(inputBase, "resize-y")}
               />
               {fieldErrors.message?.[0] ? (
@@ -175,6 +226,8 @@ export function ContactForm({ defaultService, defaultPackage }: Props) {
                 type="checkbox"
                 name="consent"
                 required
+                checked={values.consent}
+                onChange={(e) => set("consent", e.target.checked)}
                 className="mt-0.5 h-4 w-4 rounded border-border bg-ink/40 accent-brand-orange"
               />
               <span>
@@ -189,7 +242,7 @@ export function ContactForm({ defaultService, defaultPackage }: Props) {
               <p className="-mt-3 text-xs text-danger">{fieldErrors.consent[0]}</p>
             ) : null}
 
-            {/* Honeypot */}
+            {/* Honeypot — must stay uncontrolled & empty (bots fill it, humans don't). */}
             <input
               type="text"
               name="website"
@@ -229,6 +282,8 @@ function Field({
   type = "text",
   required,
   autoComplete,
+  value,
+  onChange,
   error,
 }: {
   label: string;
@@ -236,6 +291,8 @@ function Field({
   type?: string;
   required?: boolean;
   autoComplete?: string;
+  value: string;
+  onChange: (val: string) => void;
   error?: string;
 }) {
   return (
@@ -250,6 +307,8 @@ function Field({
         type={type}
         required={required}
         autoComplete={autoComplete}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         className={inputBase}
       />
       {error ? <p className="text-xs text-danger">{error}</p> : null}

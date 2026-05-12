@@ -5,18 +5,28 @@ import { EmailLayout, EMAIL_COLORS } from "./components/email-layout";
 
 type Props = { data: ContactInput };
 
-const labelStyle: React.CSSProperties = {
+const eyebrowStyle: React.CSSProperties = {
   margin: 0,
   fontSize: 11,
-  color: EMAIL_COLORS.MUTED,
-  letterSpacing: 1.2,
+  color: EMAIL_COLORS.brand,
+  letterSpacing: 1.8,
+  textTransform: "uppercase",
+  fontWeight: 700,
+};
+
+const fieldLabelStyle: React.CSSProperties = {
+  margin: 0,
+  fontSize: 10,
+  color: EMAIL_COLORS.muted2,
+  letterSpacing: 1.6,
   textTransform: "uppercase",
   fontWeight: 600,
 };
-const valueStyle: React.CSSProperties = {
-  margin: "2px 0 0",
+
+const fieldValueStyle: React.CSSProperties = {
+  margin: "3px 0 0",
   fontSize: 14,
-  color: EMAIL_COLORS.INK,
+  color: EMAIL_COLORS.fg,
   lineHeight: 1.5,
 };
 
@@ -26,71 +36,96 @@ export default function ContactNotification({ data }: Props) {
     timeStyle: "short",
     timeZone: "America/Toronto",
   });
+  const firstName = (data.name.split(" ")[0] || data.name).trim();
 
   return (
     <EmailLayout preview={`New inquiry from ${data.name}`}>
+      <Text style={eyebrowStyle}>New Inquiry</Text>
       <Heading
         as="h1"
-        style={{ margin: "0 0 6px", fontSize: 22, color: EMAIL_COLORS.INK, fontWeight: 700 }}
+        style={{
+          margin: "8px 0 6px",
+          fontSize: 24,
+          color: EMAIL_COLORS.fg,
+          fontWeight: 600,
+          lineHeight: 1.2,
+          letterSpacing: -0.3,
+        }}
       >
-        New project inquiry
+        {data.name} just reached out.
       </Heading>
-      <Text style={{ margin: "0 0 24px", fontSize: 13, color: EMAIL_COLORS.MUTED }}>
-        Submitted {submittedAt}
+      <Text style={{ margin: "0 0 24px", fontSize: 12, color: EMAIL_COLORS.muted2 }}>
+        Received {submittedAt}
       </Text>
 
       <Section>
-        <Field label="Name" value={data.name} />
-        <Field label="Email" value={data.email} />
-        {data.phone ? <Field label="Phone" value={data.phone} /> : null}
-        {data.company ? <Field label="Company" value={data.company} /> : null}
-        {data.service ? <Field label="Service interest" value={data.service} /> : null}
-        {data.budget ? <Field label="Budget" value={data.budget} /> : null}
+        <FieldRow label="Email" value={data.email} link={`mailto:${data.email}`} />
+        {data.phone ? <FieldRow label="Phone" value={data.phone} link={`tel:${data.phone}`} /> : null}
+        {data.company ? <FieldRow label="Company" value={data.company} /> : null}
+        {data.service ? <FieldRow label="Service interest" value={data.service} /> : null}
+        {data.budget ? <FieldRow label="Budget" value={data.budget} /> : null}
       </Section>
 
-      <Hr style={{ border: "none", borderTop: `1px solid ${EMAIL_COLORS.BORDER}`, margin: "20px 0" }} />
+      <Hr style={{ border: "none", borderTop: `1px solid ${EMAIL_COLORS.border}`, margin: "20px 0" }} />
 
-      <Text style={labelStyle}>Message</Text>
+      <Text style={fieldLabelStyle}>Message</Text>
       <Section
         style={{
-          marginTop: 8,
-          padding: 16,
-          backgroundColor: "#F7F8FA",
-          borderRadius: 8,
-          border: `1px solid ${EMAIL_COLORS.BORDER}`,
+          marginTop: 10,
+          padding: 18,
+          backgroundColor: EMAIL_COLORS.surface2,
+          borderRadius: 12,
+          border: `1px solid ${EMAIL_COLORS.border}`,
         }}
       >
-        <Text style={{ margin: 0, fontSize: 14, color: EMAIL_COLORS.INK, whiteSpace: "pre-wrap", lineHeight: 1.6 }}>
+        <Text
+          style={{
+            margin: 0,
+            fontSize: 14,
+            color: EMAIL_COLORS.fg,
+            whiteSpace: "pre-wrap",
+            lineHeight: 1.65,
+          }}
+        >
           {data.message}
         </Text>
       </Section>
 
-      <Section style={{ marginTop: 28, textAlign: "center" }}>
+      <Section style={{ marginTop: 28, textAlign: "left" }}>
         <Button
-          href={`mailto:${data.email}?subject=Re:%20Your%20inquiry%20to%20LA%20Solutions`}
+          href={`mailto:${data.email}?subject=${encodeURIComponent("Re: Your inquiry to LA Digital")}`}
           style={{
-            backgroundColor: EMAIL_COLORS.BRAND,
-            color: "#FFFFFF",
-            padding: "12px 22px",
-            borderRadius: 8,
+            backgroundColor: EMAIL_COLORS.brand,
+            color: "#ffffff",
+            padding: "13px 24px",
+            borderRadius: 10,
             fontSize: 14,
             fontWeight: 600,
             textDecoration: "none",
             display: "inline-block",
+            boxShadow: "0 8px 24px -10px rgba(255, 106, 0, 0.6)",
           }}
         >
-          Reply to {data.name.split(" ")[0]}
+          Reply to {firstName} →
         </Button>
       </Section>
     </EmailLayout>
   );
 }
 
-function Field({ label, value }: { label: string; value: string }) {
+function FieldRow({ label, value, link }: { label: string; value: string; link?: string }) {
   return (
     <Section style={{ marginBottom: 14 }}>
-      <Text style={labelStyle}>{label}</Text>
-      <Text style={valueStyle}>{value}</Text>
+      <Text style={fieldLabelStyle}>{label}</Text>
+      <Text style={fieldValueStyle}>
+        {link ? (
+          <a href={link} style={{ color: EMAIL_COLORS.fg, textDecoration: "none", borderBottom: `1px dashed ${EMAIL_COLORS.muted2}` }}>
+            {value}
+          </a>
+        ) : (
+          value
+        )}
+      </Text>
     </Section>
   );
 }

@@ -15,9 +15,9 @@ export function ServicesTeaser() {
   return (
     <Section id="services">
       <SectionHeading
-        eyebrow="What we build"
-        title="Everything your business needs, under one roof."
-        description="From your first landing page to a custom internal CRM — websites, apps, automation, AI, and digital ads. Pick a package or mix-and-match."
+        eyebrow="One platform, three pieces"
+        title="A business operating system, sold as a subscription."
+        description="Pick a Platform Plan, layer on Growth Services to drive customers in, and add capabilities like mobile apps, AI, and automation as you scale. Simple monthly pricing — no surprise quotes."
       />
 
       <motion.div
@@ -25,7 +25,11 @@ export function ServicesTeaser() {
         whileInView="show"
         viewport={{ once: true, amount: 0.15 }}
         variants={reduced ? undefined : stagger(0.05, 0.08)}
-        className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        className={
+          featuredServices.length <= 2
+            ? "mt-12 grid grid-cols-1 gap-5 md:grid-cols-2"
+            : "mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        }
       >
         {featuredServices.map((s) => (
           <ServiceCard key={s.id} service={s} />
@@ -34,7 +38,7 @@ export function ServicesTeaser() {
 
       <div className="mt-10 flex justify-center">
         <Button href="/services" variant="outline" size="lg">
-          See all services & pricing
+          See every plan & price
           <ArrowRight className="h-4 w-4" />
         </Button>
       </div>

@@ -75,7 +75,7 @@ export function SocialIcons({ socials, size = "sm", className }: Props) {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`LA Solutions on ${LABEL_MAP[s.platform]}`}
+              aria-label={`LA Digital on ${LABEL_MAP[s.platform]}`}
               className={cn(
                 "grid place-items-center rounded-full border border-border bg-surface/40 text-muted transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-orange/50 hover:text-brand-orange hover:shadow-glow-soft",
                 btnClass,

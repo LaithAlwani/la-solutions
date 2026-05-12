@@ -2,15 +2,26 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "motion/react";
-import { formatCAD, unitSuffix } from "@/lib/format";
+import { formatCAD } from "@/lib/format";
 import { cn } from "@/lib/cn";
 
 type Unit = "one-time" | "per-month" | "per-project";
 
 type Props = {
   price: number;
-  /** Optional original price (rendered as strikethrough — used for bundle savings). */
-  originalPrice?: number;
+  /**
+   * Optional ongoing monthly price — rendered as a secondary "+ $X/mo" line
+   * under the main price. When provided, the main `price` is treated as a
+   * one-time setup fee regardless of `unit`.
+   */
+  monthlyPrice?: number;
+  /**
+   * Optional one-time setup fee — rendered as a small secondary line under
+   * a monthly price. When `setupWaivedAnnual` is true the line is presented
+   * with strikethrough + "waived with annual commitment" copy.
+   */
+  setupFee?: number;
+  setupWaivedAnnual?: boolean;
   unit?: Unit;
   emphasis?: "lg" | "xl";
   className?: string;
@@ -21,8 +32,16 @@ const EMPHASIS = {
   xl: "text-4xl sm:text-5xl md:text-6xl",
 };
 
-export function PriceDisplay({ price, originalPrice, unit, emphasis = "lg", className }: Props) {
-  const ref = useRef<HTMLSpanElement>(null);
+export function PriceDisplay({
+  price,
+  monthlyPrice,
+  setupFee,
+  setupWaivedAnnual,
+  unit,
+  emphasis = "lg",
+  className,
+}: Props) {
+  const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
   const reduced = useReducedMotion();
   const [shown, setShown] = useState(reduced ? price : 0);
@@ -44,27 +63,62 @@ export function PriceDisplay({ price, originalPrice, unit, emphasis = "lg", clas
 
   if (price === 0) {
     return (
-      <span ref={ref} className={cn("font-display font-semibold", EMPHASIS[emphasis], className)}>
+      <div ref={ref} className={cn("font-display font-semibold", EMPHASIS[emphasis], className)}>
         Custom quote
-      </span>
+      </div>
     );
   }
 
-  const suffix = unitSuffix(unit);
+  // Suffix on the main price: only show "/mo" when it's a pure monthly retainer
+  // (no separate setup). Setup-only and setup+monthly packages render no
+  // suffix — the monthly is shown on its own line below.
+  const mainSuffix = !monthlyPrice && unit === "per-month" ? "/mo" : null;
 
   return (
-    <span ref={ref} className={cn("flex flex-wrap items-baseline gap-x-2 gap-y-1 font-display leading-none", className)}>
-      <span className={cn("font-semibold tabular-nums text-foreground", EMPHASIS[emphasis])}>
-        {formatCAD(shown)}
+    <div ref={ref} className={cn("flex flex-col gap-1.5", className)}>
+      <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-muted">
+        Starting at
       </span>
-      {suffix ? <span className="text-sm font-medium text-muted">{suffix}</span> : null}
-      <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted">CAD</span>
-      {originalPrice && originalPrice > price ? (
-        <span className="ml-1 text-sm font-medium text-muted-2 line-through tabular-nums">
-          {formatCAD(originalPrice)}
+      <div className="flex flex-wrap items-baseline gap-x-1.5 gap-y-1 leading-none">
+        <span className={cn("font-display font-semibold tabular-nums text-foreground", EMPHASIS[emphasis])}>
+          {formatCAD(shown)}
         </span>
+        {mainSuffix ? (
+          <span className="text-sm font-medium text-muted">{mainSuffix}</span>
+        ) : null}
+        <span className="ml-0.5 text-[9px] font-medium uppercase tracking-[0.18em] text-muted-2">
+          CAD
+        </span>
+      </div>
+      {monthlyPrice ? (
+        <div className="mt-1.5 flex items-baseline gap-1.5">
+          <span className="text-sm text-muted">+</span>
+          <span className="font-display text-lg font-semibold tabular-nums text-foreground/90">
+            {formatCAD(monthlyPrice)}
+          </span>
+          <span className="text-xs font-medium text-muted">/mo</span>
+        </div>
       ) : null}
-    </span>
+      {setupFee ? (
+        <div className="mt-2 flex flex-wrap items-baseline gap-x-1.5">
+          <span className="text-xs font-medium text-muted">+</span>
+          <span
+            className={cn(
+              "font-display text-sm font-semibold tabular-nums",
+              setupWaivedAnnual ? "text-muted-2 line-through" : "text-foreground/90",
+            )}
+          >
+            {formatCAD(setupFee)}
+          </span>
+          <span className="text-xs font-medium text-muted">setup</span>
+          {setupWaivedAnnual ? (
+            <span className="text-xs font-semibold text-brand-orange">
+              · $0 with annual
+            </span>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
   );
 }
 
@@ -84,7 +138,7 @@ export function StartingAt({
       </span>
     );
   }
-  const suffix = unitSuffix(unit);
+  const suffix = unit === "per-month" ? "/mo" : "";
   return (
     <span className={cn("inline-flex items-baseline gap-1.5", className)}>
       <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">From</span>
@@ -92,7 +146,7 @@ export function StartingAt({
         {formatCAD(price)}
         {suffix}
       </span>
-      <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted">CAD</span>
+      <span className="text-[9px] font-medium uppercase tracking-[0.18em] text-muted-2">CAD</span>
     </span>
   );
 }

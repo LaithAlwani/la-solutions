@@ -24,7 +24,7 @@ export function Logo({
   className,
   withWordmark = true,
   href = "/",
-  alt = "LA Solutions logo",
+  alt = "LA Digital logo",
   priority,
 }: Props) {
   const d = DIM[size];
@@ -48,7 +48,7 @@ export function Logo({
       {withWordmark ? (
         <span className="flex flex-col leading-none">
           <span className="font-display text-base font-bold tracking-tight text-foreground">
-            LA Solutions
+            LA Digital
           </span>
           <span className="text-[10px] uppercase tracking-[0.18em] text-muted">
             Web · Apps · AI

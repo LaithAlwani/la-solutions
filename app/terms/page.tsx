@@ -27,7 +27,7 @@ export default function TermsPage() {
           </p>
         </Block>
 
-        <Block title="2. About LA Solutions">
+        <Block title="2. About LA Digital">
           <p>
             The Site is operated by {siteConfig.company.legalName}, based in{" "}
             {siteConfig.contact.city}, {siteConfig.contact.region}. {siteConfig.company.legalName}{" "}

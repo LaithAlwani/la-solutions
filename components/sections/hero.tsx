@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -46,7 +46,7 @@ export function Hero() {
           className="flex max-w-3xl flex-col gap-6"
         >
           <motion.div variants={itemVariants}>
-            <Eyebrow>Toronto · Web · Apps · AI</Eyebrow>
+            <Eyebrow>Business platform · Subscription · Ottawa</Eyebrow>
           </motion.div>
 
           <motion.h1
@@ -60,23 +60,30 @@ export function Hero() {
             {siteConfig.company.heroSubheadline}
           </motion.p>
 
+          <motion.div variants={itemVariants} className="mt-2">
+            <span className="inline-flex items-center gap-2 rounded-pill border border-brand-orange/40 bg-brand-orange/12 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-brand-orange">
+              <Sparkles className="h-3.5 w-3.5" />
+              {siteConfig.pricing.annualPromoLine}
+            </span>
+          </motion.div>
+
           <motion.div variants={itemVariants} className="mt-4 flex flex-wrap items-center gap-3">
             <Button href="/services" variant="primary" size="lg">
-              See pricing
+              See plans
               <ArrowRight className="h-4 w-4" />
             </Button>
             <Button href="/#contact" variant="outline" size="lg">
               <Play className="h-4 w-4" />
-              Start a project
+              Book a discovery call
             </Button>
           </motion.div>
 
           <motion.div variants={itemVariants} className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-2">
             <span className="inline-flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-success" />
-              Now accepting projects
+              Now onboarding new clients
             </span>
-            <span>Fixed-price quotes in 48h</span>
+            <span>Monthly subscription, no long contracts</span>
             <span>Transparent pricing in CAD</span>
           </motion.div>
         </motion.div>

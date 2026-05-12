@@ -11,9 +11,9 @@ type Props = {
 };
 
 export function CtaBanner({
-  title = "Not sure which package fits? Let's talk.",
-  description = "Tell us about your project — we'll send a fixed-price quote within two business days.",
-  ctaLabel = "Start a project",
+  title = "Not sure which plan fits? Let's talk.",
+  description = "Book a quick discovery call and we'll recommend the right plan, add-ons, and growth services for your business.",
+  ctaLabel = "Book a discovery call",
   ctaHref = "/#contact",
 }: Props) {
   return (

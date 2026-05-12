@@ -47,9 +47,19 @@ export function Process() {
           variants={reduced ? undefined : stagger(0.05, 0.1)}
           className="relative flex flex-col gap-5"
         >
+          {/*
+            Connector line that runs through the center of each step number
+            circle. Geometry: each circle is h-12 (3rem); each <li> has p-5
+            (1.25rem) of padding; the circle is the first flex child, so:
+              circle center X (from <ol> left)        = 1.25rem + 1.5rem = 2.75rem
+              first circle center Y (from <ol> top)   = 1.25rem + 1.5rem = 2.75rem
+              last circle center Y (from <ol> bottom) = 1.25rem + 1.5rem = 2.75rem
+            -translate-x-1/2 centers the line's width on the circle center
+            regardless of line thickness.
+          */}
           <span
             aria-hidden
-            className="absolute left-[1.65rem] top-2 bottom-2 w-px bg-linear-to-b from-brand-orange/60 via-brand-orange/20 to-transparent"
+            className="pointer-events-none absolute left-11 top-11 bottom-11  w-px -translate-x-1/2 bg-brand-orange/40"
           />
           {siteConfig.process.map((step) => (
             <motion.li

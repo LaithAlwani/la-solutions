@@ -1,6 +1,11 @@
 import { z } from "zod";
 
-export const BUDGET_VALUES = ["<$1k", "$1k–$3k", "$3k–$6k", "$6k+"] as const;
+export const BUDGET_VALUES = [
+  "<$200/mo",
+  "$200–$500/mo",
+  "$500–$1,000/mo",
+  "$1,000+/mo",
+] as const;
 
 export const contactSchema = z.object({
   name: z.string().min(2, "Please enter your name").max(80),

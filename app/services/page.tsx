@@ -7,8 +7,8 @@ import { CtaBanner } from "@/components/sections/cta-banner";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Services & Pricing",
-  description: `Transparent pricing for every service ${siteConfig.company.name} offers — websites, booking, AI, automation, marketing, and more.`,
+  title: "Plans & Pricing",
+  description: `Subscription pricing for every plan ${siteConfig.company.name} offers — Platform Plans, Growth Services, and Add-ons. $0 setup with annual commitment.`,
 };
 
 export default function ServicesPage() {
@@ -18,9 +18,9 @@ export default function ServicesPage() {
         <div className="max-w-3xl">
           <SectionHeading
             as="h1"
-            eyebrow="Pricing in CAD"
-            title="Every service, every package, every price."
-            description="No hidden retainers, no surprise upsells. Pick a tier, mix services, or ask for a custom quote — all prices are starting ranges and quoted on a fixed basis after a short discovery call."
+            eyebrow="Subscription pricing · CAD"
+            title="Pick a plan, scale on your terms."
+            description="Three Platform Plans, three Growth Services, and five Add-ons — all on a simple monthly subscription. The standard $499 setup is waived with an annual commitment."
           />
         </div>
       </Section>

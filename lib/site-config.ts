@@ -1,528 +1,382 @@
 import type { SiteConfig } from "./types";
 
 // ----------------------------------------------------------------------------
-// LA Solutions — Single source of truth.
-// Edit company / contact / socials / Resend addresses here. All pages and
-// components read from this file.
-// Placeholders are marked PLACEHOLDER — replace before going live.
+// LA Digital — Single source of truth.
 //
-// Pricing is in CAD. Bundle packages list both `price` (the discounted bundle
-// price) and `originalPrice` (the sum of à-la-carte prices) so the savings
-// render as a strikethrough beside the price.
+// Subscription-first pricing model:
+//   1. Platform Plans (Presence / Growth / Scale) — monthly subscription
+//      with a $499 one-time setup fee. Setup is waived with a 12-month
+//      annual commitment.
+//   2. Growth Services (SEO / Social Media / Paid Advertising) — monthly,
+//      sold separately from the platform.
+//   3. Platform Add-ons (Mobile App / Desktop App / AI Assistant /
+//      Business Automation / Integrations) — monthly upgrades layered on
+//      top of any Platform Plan.
+//
+// Every price is "Starting at $X". The discovery call sets the final number.
 // ----------------------------------------------------------------------------
 
 export const siteConfig: SiteConfig = {
   company: {
-    name: "LA Solutions",
-    legalName: "LA Solutions",
-    tagline: "Web Developer",
-    description: "Premium websites, automation, and AI for ambitious businesses.",
-    heroHeadline: "Websites that convert. Software that scales.",
+    name: "LA Digital",
+    legalName: "LA Digital",
+    tagline: "Business platform & growth partner",
+    description:
+      "A business operating system for ambitious companies — websites, automation, and growth services on a simple monthly subscription.",
+    heroHeadline: "Your business, powered by one platform.",
     heroSubheadline:
-      "We design and build full-stack websites, desktop and mobile apps, and digital advertising — with transparent pricing in CAD.",
+      "Websites, automation, customer management, and growth — bundled into a simple monthly subscription. $0 setup with an annual commitment.",
     foundedYear: 2024,
     locale: "en-CA",
   },
 
   contact: {
-    email: "info@lasolutions.ca", // PLACEHOLDER
-    phone: "+1 (613) 884-1155", // PLACEHOLDER
-    city: "Ottawa", // PLACEHOLDER
+    email: "info@ladigital.ca",
+    phone: "+1 (613) 884-1155",
+    city: "Ottawa",
     region: "Ontario, Canada",
     addressLine: "Ottawa, ON, Canada",
-    businessHours: "Mon–Fri, 9am–6pm ET",
+    businessHours: "Mon–Fri, 9am–4pm ET",
+  },
+
+  pricing: {
+    setupFee: 499,
+    setupWaivedAnnual: true,
+    annualPromoLine: "$0 setup fee with annual commitment.",
   },
 
   socials: [
-    { platform: "instagram", url: "https://instagram.com/", handle: "@lasolutions" }, // PLACEHOLDER
-    { platform: "youtube", url: "https://youtube.com/", handle: "@lasolutions" }, // PLACEHOLDER
-    { platform: "tiktok", url: "https://tiktok.com/", handle: "@lasolutions" }, // PLACEHOLDER
-    { platform: "facebook", url: "https://facebook.com/", handle: "lasolutions" }, // PLACEHOLDER
+    { platform: "instagram", url: "https://instagram.com/ladigital", handle: "@ladigital" },
+    { platform: "youtube", url: "https://youtube.com/", handle: "@ladigital" },
+    { platform: "tiktok", url: "https://tiktok.com/", handle: "@ladigital" },
+    { platform: "facebook", url: "https://facebook.com/", handle: "ladigital" },
   ],
 
   valueProps: [
     {
       iconName: "BadgeDollarSign",
-      title: "Transparent pricing",
+      title: "Subscription, not a project quote",
       description:
-        "Every package, every fee — published in CAD. No hidden surprises in the proposal.",
+        "One predictable monthly bill that covers your platform, hosting, maintenance, and ongoing support — no surprise invoices, no scope creep.",
     },
     {
       iconName: "Zap",
-      title: "Built for results",
+      title: "$0 setup with annual commitment",
       description:
-        "Performance-first builds with SEO, analytics, and conversion patterns baked in from day one.",
+        "Skip the standard $499 onboarding fee when you sign on for 12 months. Your platform is ready to launch within weeks, not quarters.",
     },
     {
       iconName: "Headphones",
-      title: "Real support",
+      title: "A long-term growth partner",
       description:
-        "Direct access to the team that built your site. Same-day responses during business hours.",
+        "We don't disappear after launch. Every plan includes ongoing updates, security, support, and a team that knows your business.",
     },
   ],
 
   services: [
     // ====================================================================
-    // BUNDLES — pre-built combos at a discount. Featured first on /services
-    // and on the home teaser so they catch the eye.
+    // 1. PLATFORM PLANS — Presence / Growth / Scale.
+    //    Monthly subscription + one-time $499 setup (waived with annual).
     // ====================================================================
     {
-      id: "bundles",
-      name: "Bundles",
-      summary: "Pre-built combos that save you money — and headaches.",
+      id: "plans",
+      name: "Platform Plans",
+      summary:
+        "Three plans that grow with you — from a polished online presence to a fully automated operating system.",
       longDescription:
-        "Most clients buy more than one service anyway. Bundles combine the most-requested combinations at a meaningful discount, with one project, one timeline, and one invoice.",
-      iconName: "Sparkles",
-      image: "/5.jpg",
-      featured: true,
-      packages: [
-        {
-          id: "complete-business",
-          name: "Complete Business Site",
-          tagline: "Everything you need to launch online.",
-          price: 4800,
-          originalPrice: 5800,
-          currency: "CAD",
-          unit: "one-time",
-          highlight: true,
-          features: [
-            "Pro custom website (multi-page, custom design)",
-            "Online appointment booking",
-            "Stripe payment integration",
-            "User accounts & secure login",
-            "Performance & SEO foundation",
-            "Analytics setup",
-          ],
-          notes: ["Save $1,000 vs. buying à la carte."],
-        },
-        {
-          id: "marketing-growth",
-          name: "Marketing Growth Bundle",
-          tagline: "SEO + Social + Paid Ads, managed monthly.",
-          price: 1800,
-          originalPrice: 2200,
-          currency: "CAD",
-          unit: "per-month",
-          features: [
-            "Social media content management",
-            "Facebook & Instagram ads management",
-            "Google Ads management",
-            "Monthly reporting & optimization",
-            "Free SEO setup ($750 value)",
-          ],
-          notes: [
-            "Save $400/mo + free SEO setup ($750).",
-            "Ad spend on Meta and Google is paid separately by the client.",
-          ],
-        },
-        {
-          id: "ai-automation",
-          name: "AI & Automation Bundle",
-          tagline: "Smart chat + automated messaging, working together.",
-          price: 1000,
-          originalPrice: 1250,
-          currency: "CAD",
-          unit: "one-time",
-          features: [
-            "AI chat agent on your website",
-            "FAQ automation & lead capture",
-            "SMS appointment reminders",
-            "Email confirmations & follow-ups",
-            "Auto-responses tuned to your brand",
-          ],
-          notes: ["Save $250 vs. buying separately."],
-        },
-      ],
-      cta: { label: "See bundles", href: "/services#bundles" },
-    },
-
-    // ====================================================================
-    // WEBSITES & APPS
-    // ====================================================================
-    {
-      id: "websites",
-      name: "Websites & Apps",
-      summary: "Fast, beautifully designed sites that turn visitors into customers.",
-      longDescription:
-        "From a clean small-business site to a fully custom platform — built on the latest stack, optimized for speed and SEO, and designed to convert.",
-      iconName: "Globe",
+        "Every plan includes hosting, maintenance, security, and support — all rolled into one simple monthly subscription. Upgrade anytime as your business grows. The standard $499 setup is waived with a 12-month commitment.",
+      iconName: "Layers",
       image: "/1.jpg",
       featured: true,
       packages: [
         {
-          id: "starter",
-          name: "Starter Website",
-          tagline: "Mobile-first site for small businesses.",
-          price: 1200,
-          currency: "CAD",
-          unit: "one-time",
-          features: [
-            "Up to 5 pages, responsive design",
-            "Contact form with email notifications",
-            "Social media links & Google Maps",
-            "Basic on-page SEO",
-            "Domain & hosting setup",
-          ],
-        },
-        {
-          id: "pro",
-          name: "Pro Website",
-          tagline: "Custom design with advanced functionality.",
-          price: 3500,
-          currency: "CAD",
-          unit: "one-time",
-          highlight: true,
-          features: [
-            "Custom UI/UX design",
-            "Up to 10 pages with dynamic content",
-            "Booking & contact integrations",
-            "Advanced SEO structure",
-            "Analytics setup & performance tuning",
-          ],
-        },
-        {
-          id: "ecommerce",
-          name: "E-commerce / Custom App",
-          tagline: "Full online store or custom-built application.",
-          price: 0, // → "Custom quote"
-          currency: "CAD",
-          unit: "per-project",
-          features: [
-            "Product catalog & cart",
-            "Checkout with Stripe",
-            "Inventory & order management",
-            "Mobile app companion (optional)",
-            "Custom integrations (CRM, ERP, APIs)",
-          ],
-          ctaLabel: "Request a quote",
-        },
-      ],
-      cta: { label: "See website packages", href: "/services#websites" },
-    },
-
-    // ====================================================================
-    // OPERATIONS — booking + payments + login (the "make it work" tier)
-    // ====================================================================
-    {
-      id: "operations",
-      name: "Bookings, Payments & Logins",
-      summary: "The operational pieces that run your business online.",
-      longDescription:
-        "Add the systems your customers expect — schedule appointments, take payments, and let users have their own accounts. Plug each one into an existing site or include them in a new build.",
-      iconName: "CalendarClock",
-      image: "/7.jpg",
-      featured: true,
-      packages: [
-        {
-          id: "booking",
-          name: "Online Booking",
-          tagline: "Customers schedule themselves.",
-          price: 1200,
-          currency: "CAD",
-          unit: "one-time",
-          features: [
-            "Calendar with availability rules",
-            "Email confirmations & reminders",
-            "Customer & appointment dashboard",
-            "Service-level pricing & duration",
-            "Mobile-friendly booking flow",
-          ],
-        },
-        {
-          id: "payments",
-          name: "Payment Integration",
-          tagline: "Take money online, securely.",
-          price: 600,
-          currency: "CAD",
-          unit: "one-time",
-          features: [
-            "Stripe checkout",
-            "One-time, deposit, or subscription billing",
-            "Invoice generation",
-            "Payment receipts & order history",
-            "PCI-compliant by default",
-          ],
-          notes: ["Stripe processor fees (~2.9% + $0.30 per transaction) are billed by Stripe."],
-        },
-        {
-          id: "auth",
-          name: "User Accounts & Login",
-          tagline: "Email/password + Google + Facebook sign-in.",
-          price: 500,
-          currency: "CAD",
-          unit: "one-time",
-          features: [
-            "Email/password authentication",
-            "Google & Facebook social login",
-            "Password recovery flow",
-            "Role-based access (customer / staff / admin)",
-            "Session security & rate limiting",
-          ],
-        },
-      ],
-      cta: { label: "See operations packages", href: "/services#operations" },
-    },
-
-    // ====================================================================
-    // MARKETING — SEO + Social + Paid Ads
-    // ====================================================================
-    {
-      id: "marketing",
-      name: "Marketing Services",
-      summary: "Get found, get followed, get clicks.",
-      longDescription:
-        "Three levers that work better together: SEO to be found organically, social to stay top-of-mind, and paid ads to drive demand on demand. Buy them separately or save with the Marketing Growth bundle.",
-      iconName: "Target",
-      image: "/2.jpg",
-      featured: true,
-      packages: [
-        {
-          id: "seo",
-          name: "SEO Setup",
-          tagline: "On-page + technical + Google Business.",
-          price: 750,
-          currency: "CAD",
-          unit: "one-time",
-          features: [
-            "On-page SEO across all pages",
-            "Technical SEO audit & fixes",
-            "Google Business Profile optimization",
-            "Keyword targeting & meta data",
-            "Performance & Core Web Vitals tuning",
-          ],
-        },
-        {
-          id: "social",
-          name: "Social Media Management",
-          tagline: "Done-for-you content across your channels.",
-          price: 600,
+          id: "presence",
+          name: "Presence",
+          tagline: "Everything your business needs to look professional online.",
+          price: 199,
           currency: "CAD",
           unit: "per-month",
+          setupFee: 499,
+          setupWaivedAnnual: true,
           features: [
-            "Content creation (posts, reels, captions)",
-            "Posting schedule across platforms",
-            "Brand-consistent visuals",
-            "Engagement support",
-            "Monthly performance recap",
-          ],
-        },
-        {
-          id: "paid-ads",
-          name: "Paid Ads (per platform)",
-          tagline: "Meta or Google — managed monthly.",
-          price: 800,
-          currency: "CAD",
-          unit: "per-month",
-          features: [
-            "Ad creative & copy",
-            "Audience or keyword targeting",
-            "Conversion tracking setup",
-            "Weekly optimization",
-            "Monthly reporting",
+            "Mobile-first website or app",
+            "Hosting, security, and updates",
+            "Contact forms with notifications",
+            "Basic SEO and Google setup",
+            "Analytics dashboard",
+            "Social media links",
+            "Minor monthly edits",
+            "Ongoing support",
           ],
           notes: [
-            "Per platform (Meta or Google). Choose one or run both.",
-            "Ad spend is paid separately by the client.",
-          ],
-        },
-      ],
-      cta: { label: "See marketing options", href: "/services#marketing" },
-    },
-
-    // ====================================================================
-    // AI & AUTOMATION
-    // ====================================================================
-    {
-      id: "ai",
-      name: "AI & Automation",
-      summary: "Round-the-clock assistance and customer messaging on autopilot.",
-      longDescription:
-        "An AI agent that knows your business and an automated messaging stack that follows up so you don't have to.",
-      iconName: "Bot",
-      image: "/3.jpg",
-      featured: true,
-      packages: [
-        {
-          id: "ai-chat",
-          name: "AI Chat Agent",
-          tagline: "Trained on your business. Always on.",
-          price: 750,
-          currency: "CAD",
-          unit: "one-time",
-          features: [
-            "Custom-trained on your content",
-            "FAQ automation",
-            "Booking & lead capture",
-            "Brand-tuned tone of voice",
-            "Hand-off to human when needed",
-          ],
-        },
-        {
-          id: "messaging",
-          name: "Automated Messaging",
-          tagline: "SMS + email automation.",
-          price: 500,
-          currency: "CAD",
-          unit: "one-time",
-          features: [
-            "Appointment reminders (SMS)",
-            "Email confirmations & receipts",
-            "Follow-up sequences",
-            "Auto-responses to common questions",
-            "Two-way SMS support",
-          ],
-        },
-      ],
-      cta: { label: "See AI options", href: "/services#ai" },
-    },
-
-    // ====================================================================
-    // ADMIN DASHBOARDS
-    // ====================================================================
-    {
-      id: "dashboards",
-      name: "Admin Dashboards",
-      summary: "A custom command center for your team.",
-      longDescription:
-        "Manage appointments, customers, employees, inventory, and analytics from one purpose-built dashboard — wired to your existing site or app.",
-      iconName: "LayoutDashboard",
-      image: "/4.jpg",
-      packages: [
-        {
-          id: "admin",
-          name: "Staff & Admin Dashboard",
-          tagline: "Operations, all in one place.",
-          price: 2500,
-          currency: "CAD",
-          unit: "one-time",
-          features: [
-            "Employee & schedule management",
-            "Customer database & history",
-            "Appointment & order tracking",
-            "Analytics & reporting",
-            "Custom internal tools on request",
-          ],
-        },
-      ],
-      cta: { label: "See dashboard options", href: "/services#dashboards" },
-    },
-
-    // ====================================================================
-    // HOSTING & MAINTENANCE
-    // ====================================================================
-    {
-      id: "hosting",
-      name: "Hosting & Maintenance",
-      summary: "Hosting, backups, updates, and ongoing support.",
-      longDescription:
-        "Keep your site fast, secure, and up to date — without thinking about it. Two tiers depending on how much support you need.",
-      iconName: "Server",
-      packages: [
-        {
-          id: "standard",
-          name: "Standard Maintenance",
-          tagline: "Hosting, security, backups, support.",
-          price: 150,
-          currency: "CAD",
-          unit: "per-month",
-          features: [
-            "Website hosting",
-            "Security updates",
-            "Daily backups",
-            "Technical support",
-            "Minor edits & content updates",
-            "Performance monitoring",
+            "Ideal for businesses that need a professional online presence.",
           ],
         },
         {
           id: "growth",
-          name: "Growth Package",
-          tagline: "Standard + ongoing growth services.",
-          price: 450,
+          name: "Growth",
+          tagline: "Turn your website into a business operating system.",
+          price: 399,
           currency: "CAD",
           unit: "per-month",
+          setupFee: 499,
+          setupWaivedAnnual: true,
           highlight: true,
           features: [
-            "Everything in Standard",
-            "SEO monitoring & monthly tweaks",
-            "Social media support",
-            "Monthly analytics report",
-            "Priority support",
-            "Automated systems monitoring",
+            "Everything in Presence, plus:",
+            "Customer accounts & logins",
+            "Online booking system",
+            "Payment processing",
+            "Customer dashboard",
+            "Automated email notifications",
+            "SMS reminders",
+            "SEO optimization",
+            "Advanced analytics",
+          ],
+          notes: [
+            "Ideal for businesses that take bookings, payments, or manage customers online.",
+          ],
+        },
+        {
+          id: "scale",
+          name: "Scale",
+          tagline: "Automation and operational systems built to help your business scale.",
+          price: 799,
+          currency: "CAD",
+          unit: "per-month",
+          setupFee: 499,
+          setupWaivedAnnual: true,
+          features: [
+            "Everything in Growth, plus:",
+            "Admin dashboard",
+            "AI assistant integration",
+            "CRM functionality",
+            "Business reporting dashboards",
+            "Workflow automations",
+            "Third-party integrations",
+            "Marketing infrastructure setup",
+            "Conversion tracking",
+            "Meta Pixel & Google Analytics",
+            "Landing page systems",
+          ],
+          notes: [
+            "Includes marketing infrastructure and tracking — not active ad management, SEO, or social media (those are Growth Services).",
           ],
         },
       ],
-      cta: { label: "See maintenance plans", href: "/services#hosting" },
+      cta: { label: "Compare platform plans", href: "/services#plans" },
     },
 
     // ====================================================================
-    // CUSTOM SOLUTIONS
+    // 2. GROWTH SERVICES — SEO / Social / Paid Ads.
+    //    Monthly. Sold separately from the platform plans.
     // ====================================================================
     {
-      id: "custom",
-      name: "Custom Solutions",
-      summary: "Custom databases, CRMs, SaaS platforms, and AI automation — built to fit.",
+      id: "growth-services",
+      name: "Growth Services",
+      summary:
+        "Active marketing services that bring customers to your platform — SEO, social media, and paid advertising.",
       longDescription:
-        "When off-the-shelf can't do it, we build it. Internal tools, CRMs, SaaS platforms, mobile apps, API integrations, AI-powered workflows.",
-      iconName: "Wrench",
+        "Once your platform is live, growth services drive the traffic, audience, and conversions that turn it into revenue. Each one is a separate monthly retainer — pick the ones that fit your stage.",
+      iconName: "TrendingUp",
+      image: "/3.jpg",
+      featured: true,
       packages: [
         {
-          id: "custom",
-          name: "Custom Project",
-          tagline: "Scoped to your needs.",
-          price: 0,
+          id: "seo",
+          name: "SEO",
+          tagline: "Get found by the customers already searching for you.",
+          price: 500,
           currency: "CAD",
-          unit: "per-project",
+          unit: "per-month",
           features: [
-            "Custom databases",
-            "Internal business tools",
-            "Mobile app (iOS / Android)",
-            "API integrations",
-            "CRM systems",
-            "SaaS platforms",
-            "AI-powered automation",
+            "On-page SEO",
+            "Technical SEO",
+            "Google Business optimization",
+            "Keyword tracking",
+            "Monthly SEO reporting",
+            "Continuous optimization",
           ],
-          notes: ["Custom quote based on project scope."],
-          ctaLabel: "Request a quote",
+        },
+        {
+          id: "social-media",
+          name: "Social Media",
+          tagline: "Show up, stay consistent, and grow an audience that converts.",
+          price: 600,
+          currency: "CAD",
+          unit: "per-month",
+          features: [
+            "Content creation",
+            "Reels and short-form video",
+            "Captions and hashtags",
+            "Scheduling and posting",
+            "Brand consistency",
+            "Engagement assistance",
+          ],
+        },
+        {
+          id: "paid-ads",
+          name: "Paid Advertising",
+          tagline: "Active Meta and Google ad management — built to drive leads.",
+          price: 800,
+          currency: "CAD",
+          unit: "per-month",
+          features: [
+            "Meta ads management",
+            "Google ads management",
+            "Campaign setup",
+            "Audience targeting",
+            "Ad copywriting",
+            "Ongoing optimization",
+            "Conversion tracking reviews",
+            "Monthly reporting",
+          ],
+          notes: [
+            "Ad spend (Meta / Google) paid separately by the client.",
+          ],
         },
       ],
-      cta: { label: "Request a quote", href: "/#contact" },
+      cta: { label: "Explore growth services", href: "/services#growth-services" },
+    },
+
+    // ====================================================================
+    // 3. PLATFORM ADD-ONS — Mobile / Desktop / AI / Automation / Integrations.
+    //    Monthly upgrades stacked on top of any Platform Plan.
+    // ====================================================================
+    {
+      id: "addons",
+      name: "Platform Add-ons",
+      summary:
+        "Optional upgrades that extend your platform — mobile apps, AI, automation, and integrations.",
+      longDescription:
+        "Start with the plan that fits today, then layer on add-ons when you need them. Every add-on is a monthly subscription that includes deployment, maintenance, and updates.",
+      iconName: "Plus",
+      image: "/5.jpg",
+      featured: true,
+      packages: [
+        {
+          id: "mobile-app",
+          name: "Mobile App",
+          tagline: "Turn your platform into an iOS and Android app.",
+          price: 199,
+          currency: "CAD",
+          unit: "per-month",
+          features: [
+            "iOS and Android app",
+            "App store deployment",
+            "Push notifications",
+            "Ongoing maintenance",
+            "Same login as your platform",
+          ],
+        },
+        {
+          id: "desktop-app",
+          name: "Desktop App",
+          tagline: "Windows and macOS — ideal for in-house staff and offline workflows.",
+          price: 299,
+          currency: "CAD",
+          unit: "per-month",
+          features: [
+            "Windows and macOS app",
+            "Offline-capable workflows",
+            "Deployment support",
+            "Ongoing maintenance",
+            "Great for salons, clinics, and offices",
+          ],
+        },
+        {
+          id: "ai-assistant",
+          name: "AI Assistant",
+          tagline: "A custom AI chat that answers questions and captures leads.",
+          price: 149,
+          currency: "CAD",
+          unit: "per-month",
+          features: [
+            "AI chat assistant",
+            "FAQ automation",
+            "Lead capture assistance",
+            "Customer support workflows",
+            "Trained on your business",
+          ],
+        },
+        {
+          id: "automation",
+          name: "Business Automation",
+          tagline: "Reduce repetitive work and automate customer communication.",
+          price: 249,
+          currency: "CAD",
+          unit: "per-month",
+          features: [
+            "Automated appointment reminders",
+            "Missed-appointment follow-ups",
+            "CRM workflows",
+            "Customer re-engagement",
+            "Automated review requests",
+            "Email and SMS workflows",
+            "Staff notifications",
+            "AI-assisted responses",
+          ],
+        },
+        {
+          id: "integrations",
+          name: "Additional Integrations",
+          tagline: "Connect the tools you already use.",
+          price: 99,
+          currency: "CAD",
+          unit: "per-month",
+          features: [
+            "Stripe",
+            "QuickBooks",
+            "Calendar systems",
+            "CRM systems",
+            "Third-party APIs",
+          ],
+          notes: [
+            "Pricing is per integration — quoted on the discovery call.",
+          ],
+        },
+      ],
+      cta: { label: "Browse add-ons", href: "/services#addons" },
     },
   ],
 
   process: [
-    { number: "01", title: "Discovery", description: "A short call to understand goals, audience, and scope." },
-    { number: "02", title: "Proposal", description: "Fixed-price quote and timeline within 48 hours." },
+    { number: "01", title: "Discovery", description: "A short call to understand your business, audience, and goals." },
+    { number: "02", title: "Setup", description: "Onboarding, branding configuration, and domain & DNS setup." },
     { number: "03", title: "Design", description: "Wireframes and a clickable preview for your feedback." },
-    { number: "04", title: "Build", description: "Development with weekly check-ins and live previews." },
-    { number: "05", title: "Launch", description: "Domain, hosting, and analytics live within the agreed timeline." },
-    { number: "06", title: "Support", description: "30 days of post-launch tweaks included." },
+    { number: "04", title: "Build", description: "Platform configuration with weekly check-ins and live previews." },
+    { number: "05", title: "Launch", description: "Deployment, analytics, and your platform goes live." },
+    { number: "06", title: "Ongoing Support", description: "Your subscription kicks in — updates, support, and growth, every month." },
   ],
 
   seo: {
-    defaultTitle: "LA Solutions — Websites, Automation & AI",
-    titleTemplate: "%s | LA Solutions",
+    defaultTitle: "LA Digital — The business platform for ambitious companies",
+    titleTemplate: "%s | LA Digital",
     defaultDescription:
-      "LA Solutions builds premium websites, booking systems, AI chat agents, and digital advertising for businesses. Transparent pricing in CAD.",
+      "LA Digital is a subscription-based business platform — websites, automation, customer management, and growth services on a simple monthly plan. $0 setup with an annual commitment.",
     ogImage: "/logo_300dpi.png",
-    siteUrl: "https://lasolutions.ca", // PLACEHOLDER
+    siteUrl: "https://ladigital.ca",
     keywords: [
-      "web development",
-      "Canadian web developer",
-      "Ottawa web design",
-      "AI chat agent",
-      "booking system",
-      "Stripe integration",
-      "SEO",
-      "Google Ads",
-      "Facebook Ads",
-      "social media management",
+      "business platform",
+      "subscription website",
+      "managed website service",
+      "business automation",
+      "customer management platform",
+      "online booking system",
+      "Ottawa business platform",
+      "small business operating system",
+      "AI assistant",
+      "marketing automation Canada",
     ],
   },
 
   resend: {
-    fromEmail: "LA Solutions <onboarding@resend.dev>", // PLACEHOLDER — replace once domain is verified
-    toEmail: "info@lasolutions.ca", // PLACEHOLDER
+    // TODO: once the ladigital.ca domain is verified in Resend, switch
+    // fromEmail back to "LA Digital <info@ladigital.ca>".
+    fromEmail: "LA Digital <onboarding@resend.dev>",
+    // TODO: switch toEmail back to "info@ladigital.ca" once that inbox exists.
+    // Until then route all inquiries to the founder's personal inbox.
+    toEmail: "laithalwani@gmail.com",
   },
 };
 

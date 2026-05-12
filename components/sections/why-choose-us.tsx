@@ -16,7 +16,7 @@ export function WhyChooseUs() {
       <div className="grid items-center gap-12 lg:grid-cols-2">
         <div>
           <SectionHeading
-            eyebrow="Why LA Solutions"
+            eyebrow="Why LA Digital"
             title="Premium work, plain prices, real humans."
             description="We're a small team focused on doing the work right — not a faceless agency that hands you off to interns after the kickoff call."
           />

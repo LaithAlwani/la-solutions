@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
+import { Sparkles } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { Container } from "@/components/ui/container";
 import { Icon } from "@/components/ui/icon";
 import { PackageCard } from "@/components/ui/package-card";
+import { formatCAD } from "@/lib/format";
 import { cn } from "@/lib/cn";
-import { fadeUp, stagger } from "@/lib/motion";
+import { stagger } from "@/lib/motion";
 
 export function ServicesFull() {
   return (
@@ -50,7 +52,15 @@ function CategoryNav() {
 function CategoryBlock({ service, reverse }: { service: (typeof siteConfig.services)[number]; reverse: boolean }) {
   const reduced = useReducedMotion();
   const hasImage = Boolean(service.image);
-  const cols = service.packages.length === 1 ? "md:grid-cols-1 md:max-w-md" : service.packages.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3";
+  const hasOptionsCard = service.packages.some((p) => p.options && p.options.length > 0);
+  const cols =
+    service.packages.length === 1
+      ? hasOptionsCard
+        ? "md:grid-cols-1 md:max-w-3xl mx-auto"
+        : "md:grid-cols-1 md:max-w-md"
+      : service.packages.length === 2
+        ? "md:grid-cols-2"
+        : "md:grid-cols-3";
 
   return (
     <section id={service.id} className="scroll-mt-32">
@@ -109,6 +119,15 @@ function CategoryBlock({ service, reverse }: { service: (typeof siteConfig.servi
           </h2>
           {service.longDescription ? (
             <p className="max-w-xl text-base text-muted">{service.longDescription}</p>
+          ) : null}
+          {service.id === "plans" && siteConfig.pricing.setupWaivedAnnual ? (
+            <div className="mt-2 inline-flex flex-wrap items-center gap-2 self-start rounded-pill border border-brand-orange/40 bg-brand-orange/10 px-3.5 py-1.5 text-xs font-semibold text-brand-orange">
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>
+                {formatCAD(siteConfig.pricing.setupFee)} setup —{" "}
+                <span className="font-bold">$0 with annual commitment.</span>
+              </span>
+            </div>
           ) : null}
         </motion.div>
       </div>
